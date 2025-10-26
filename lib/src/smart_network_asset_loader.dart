@@ -54,8 +54,7 @@ class SmartNetworkAssetLoader extends AssetLoader {
 
     // still nothing? Load from assets
     if (string == '') {
-      string = await rootBundle
-          .loadString(assetsPath + '/' + locale.toString() + '.json');
+      string = await rootBundle.loadString('$assetsPath/$locale.json');
     }
 
     // then returns the json file
@@ -85,8 +84,7 @@ class SmartNetworkAssetLoader extends AssetLoader {
   Future<String> loadFromNetwork(String localeName) async {
     String url = localeUrl(localeName);
 
-    url = url + '' + localeName + '.json';
-
+    url = '$url$localeName.json';
     try {
       final response =
           await Future.any([http.get(Uri.parse(url)), Future.delayed(timeout)]);
